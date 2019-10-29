@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
+const {getHouses, addHouse} = require('./controllers/controller');
 
 const app = express();
 
@@ -13,9 +14,12 @@ massive(CONNECTION_STRING)
     })
     .catch(error => {
         console.log(error)
-    })
+})
 
 app.use(express.json());
+
+app.get('/api/houses', getHouses);
+app.post('/api/houses', addHouse);
 
 app.listen(5000, () => console.log(`Running on PORT 5000`));
 // app.listen(SERVER_PORT, () => console.log(`Running on PORT ${SERVER_PORT}`));

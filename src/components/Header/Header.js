@@ -1,9 +1,18 @@
-import React, {Component} from "react"
+import React from "react";
+import "./Header.css";
+import {HashRouter, Link} from "react-router-dom";
 
-export default class Header extends Component {
-    render() {
+//components
+import routes from "../../routes";
+
+export default function Header() {
         return(
-            <div>Header</div>
+            <HashRouter>
+                <div className='header'>
+                    <Link to='/'>Dashboard</Link>
+                    <Link to='/wizard'>Wizard</Link>
+                    {routes}
+                </div>
+            </HashRouter>
         )
-    }
 }
