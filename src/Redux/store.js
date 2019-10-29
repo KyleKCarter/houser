@@ -71,14 +71,6 @@ function reducer(state = initialState, action) {
                 ...state,
                 monthlyRent: payload
             };
-        // case UPDATE_LISTING:
-        //     const { name, address, city, nation_state, zipcode, image, mortgageAmount, monthlyRent } = state;
-        //     const house = { name, address, city, nation_state, zipcode, image, mortgageAmount, monthlyRent };
-        //     const newHouse = [...state.listing, house]
-        //     return {
-        //         ...state,
-        //         listing: newHouse
-        //     };
         default:
             return state;
     }
