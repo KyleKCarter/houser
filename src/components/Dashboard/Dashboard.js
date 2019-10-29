@@ -35,12 +35,24 @@ export default class Dashboard extends Component {
             })
     }
 
+    removeHouse = (id) => {
+        axios.delete(`/api/houses/${id}`)
+            .then(response => {
+                store.dispatch({
+                    type: UPDATE_LISTING,
+                    payload: response.data
+                });
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+
     render() {
         console.log(this.state.listing)
         const {listing} = this.state;
         let mappedListing = listing.map((val, i) => {
             return (
-                <House listing={listing} house={val} key={i} />
+                <House listing={listing} house={val} key={i} removeHouse={this.removeHouse} />
             )
         })
         return (

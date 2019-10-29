@@ -19,7 +19,19 @@ addHouse = (req, res) => {
     })
 };
 
+removeHouse = (req, res) => {
+    db = req.app.get('db')
+    const { id } = req.params;
+    db.remove_house(id).then(house => {
+        res.status(200).json(house)
+    }).catch(error => {
+        console.log(error)
+        res.status(500).json("Database having issues.");
+    })
+}
+
 module.exports = {
     getHouses,
-    addHouse
+    addHouse,
+    removeHouse
 }
