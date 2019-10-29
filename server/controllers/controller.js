@@ -10,8 +10,8 @@ getHouses = (req, res) => {
 
 addHouse = (req, res) => {
     const db = req.app.get ('db');
-    const { name, address, city, state, zipcode } = req.body;
-    db.add_house( name, address, city, state, zipcode ).then(() => {
+    const { name, address, city, state, zipcode, image, mortgageAmount, monthlyRent } = req.body;
+    db.add_house( name, address, city, state, zipcode, image, mortgageAmount, monthlyRent ).then(() => {
         res.sendStatus(200)
     }).catch(error => {
         console.log(error)

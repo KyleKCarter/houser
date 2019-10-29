@@ -25,6 +25,7 @@ export default class Dashboard extends Component {
     getListing = () => {
         axios.get('/api/houses')
             .then(response => {
+                console.log(response.data);
                 store.dispatch({
                     type: UPDATE_LISTING,
                     payload: response.data

@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import "./Wizard.css";
-import axios from "axios";
+// import axios from "axios";
 import store, { UPDATE_NAME, UPDATE_ADDRESS, UPDATE_CITY, UPDATE_STATE, UPDATE_ZIPCODE } from "../../Redux/store";
+import {Link} from "react-router-dom";
 
 export default class Wizard extends Component {
     constructor() {
@@ -19,39 +20,63 @@ export default class Wizard extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    addListing = () => {
-        const { name, address, city, state, zipcode } = this.state;
-        axios.post('/api/houses', {
-            name,
-            address,
-            city,
-            state,
-            zipcode
-        }).then(response => {
-            store.dispatch({
-                type: UPDATE_NAME,
-                payload: response.data.name
-            })
-            store.dispatch({
-                type: UPDATE_ADDRESS,
-                payload: response.data.address
-            })
-            store.dispatch({
-                type: UPDATE_CITY,
-                payload: response.data.city
-            })
-            store.dispatch({
-                type: UPDATE_STATE,
-                payload: response.data.state
-            })
-            store.dispatch({
-                type: UPDATE_ZIPCODE,
-                payload: response.data.zipcode
-            })
-        }).catch(error => {
-            console.log(error);
+    addInfo = () => {
+        const {name, address, city, state, zipcode} = this.state;
+        store.dispatch({
+            type: UPDATE_NAME,
+            payload: name
+        })
+        store.dispatch({
+            type: UPDATE_ADDRESS,
+            payload: address
+        })
+        store.dispatch({
+            type: UPDATE_CITY,
+            payload: city
+        })
+        store.dispatch({
+            type: UPDATE_STATE,
+            payload: state
+        })
+        store.dispatch({
+            type: UPDATE_ZIPCODE,
+            payload: zipcode
         })
     }
+
+    // addListing = () => {
+    //     const { name, address, city, state, zipcode } = this.state;
+    //     axios.post('/api/houses', {
+    //         name,
+    //         address,
+    //         city,
+    //         state,
+    //         zipcode
+    //     }).then(response => {
+    //         store.dispatch({
+    //             type: UPDATE_NAME,
+    //             payload: response.data.name
+    //         })
+    //         store.dispatch({
+    //             type: UPDATE_ADDRESS,
+    //             payload: response.data.address
+    //         })
+    //         store.dispatch({
+    //             type: UPDATE_CITY,
+    //             payload: response.data.city
+    //         })
+    //         store.dispatch({
+    //             type: UPDATE_STATE,
+    //             payload: response.data.state
+    //         })
+    //         store.dispatch({
+    //             type: UPDATE_ZIPCODE,
+    //             payload: response.data.zipcode
+    //         })
+    //     }).catch(error => {
+    //         console.log(error);
+    //     })
+    // }
 
     handleClearFields = () => {
         this.setState({
@@ -104,8 +129,10 @@ export default class Wizard extends Component {
                             <input className='zipcode' onChange={this.handleChange} value={zipcode} name='zipcode' />
                         </form>
                     </div>
-                    <button className='addButton' onClick={this.addListing}>Complete</button>
                 </form>
+                <Link to='/step2'>
+                    <button className='addButton' onClick={this.addInfo}>Next Step</button>
+                </Link>
             </div>
         )
     }
